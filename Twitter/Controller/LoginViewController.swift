@@ -9,14 +9,29 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "LoggedIn") {
+            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+        }
+    }
+    
+    @IBAction func didLogin(_ sender: UIButton) {
+        let loginUrl = "https://api.twitter.com/oauth/request_token"
+        TwitterAPICaller.client?.login(url: loginUrl, success: {
+            UserDefaults.standard.set(true, forKey: "LoggedIn")
+            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+        }, failure: { (Error) in
+            print("Could not login")
+        })
+    }
+    
     /*
     // MARK: - Navigation
 

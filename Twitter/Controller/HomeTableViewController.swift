@@ -9,9 +9,18 @@
 import UIKit
 
 class HomeTableViewController: UITableViewController {
+    
+    var tweets = [NSDictionary]()
+    var numOfTweets: Int!
+    let myRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        myRefreshControl.addTarget(self
+            , action: #selector(loadTweets), for: .valueChanged)
+        tableView.refreshControl = myRefreshControl
+        loadTweets()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -19,28 +28,84 @@ class HomeTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    @objc func loadTweets() {
+        
+        numOfTweets = 20
+        let url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+        
+        let param = ["count":numOfTweets!]
+            
+        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: param, success: { (tweets: [NSDictionary]) in
+            self.tweets.removeAll()
+            for tweet in tweets {
+                self.tweets.append(tweet)
+            }
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        }, failure: { (Error) in
+            print("could not retreive tweets")
+        })
+    }
+    
+    func loadMoreTweets() {
+        let url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+        numOfTweets = numOfTweets + 20
+        let param = ["count":numOfTweets!]
+        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: param, success: { (tweets: [NSDictionary]) in
+            self.tweets.removeAll()
+            for tweet in tweets {
+                self.tweets.append(tweet)
+            }
+            self.tableView.reloadData()
+        }, failure: { (Error) in
+            print("could not retreive tweets")
+        })
+    }
 
+    @IBAction func didLogout(_ sender: UIBarButtonItem) {
+        TwitterAPICaller.client?.logout()
+        self.dismiss(animated: true, completion: nil)
+        UserDefaults.standard.set(false, forKey: "LoggedIn")
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tweets.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         // Configure the cell...
+        let tweet = tweets[indexPath.row]
+        let user = tweet["user"] as! NSDictionary
+        
+        cell.profileNameLabel.text = user["name"] as! String
+        cell.tweetContentLabel.text = tweet["text"] as! String
+        
+        let urlImage = URL(string: user["profile_image_url_https"] as! String)
+        let data = try? Data(contentsOf: urlImage!)
+        
+        if let imageData = data {
+            cell.profileImageView.image = UIImage(data: imageData)
+        }
+        
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == tweets.count {
+            loadMoreTweets()
+        }
+    }
+ 
 
     /*
     // Override to support conditional editing of the table view.
