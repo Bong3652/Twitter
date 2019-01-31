@@ -18,14 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueBack" translatesAutoresizingMaskIntoConstraints="NO" id="fWV-FS-XRG">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Z7-qQ-Sgt">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="faH-fC-AXP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="734"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhd-4P-Plm">
-                                <rect key="frame" x="107.66666666666669" y="378.66666666666669" width="160" height="55"/>
-                                <color key="backgroundColor" red="0.1389768284" green="0.53735430529999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="87.666666666666686" y="378.66666666666669" width="200" height="55"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="dzd-Iu-raO"/>
-                                    <constraint firstAttribute="width" constant="160" id="qia-dx-yWv"/>
+                                    <constraint firstAttribute="width" constant="200" id="qia-dx-yWv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -33,21 +44,39 @@
                                     <action selector="didLogin:" destination="jBS-ed-WDx" eventType="touchUpInside" id="KfH-04-Kav"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwitterLogoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="JTb-Cm-sJh">
+                                <rect key="frame" x="87.666666666666686" y="154.66666666666666" width="200" height="199.99999999999997"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="9LI-Ur-iB4"/>
+                                    <constraint firstAttribute="width" constant="200" id="D9K-Pa-Wgb"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1389768284" green="0.53735430529999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Rhd-4P-Plm" firstAttribute="centerY" secondItem="ZPu-iE-vSb" secondAttribute="centerY" id="2Yj-or-mFf"/>
+                            <constraint firstItem="aHO-a9-D9A" firstAttribute="trailing" secondItem="4Z7-qQ-Sgt" secondAttribute="trailing" id="6mq-7k-5a8"/>
+                            <constraint firstItem="aHO-a9-D9A" firstAttribute="bottom" secondItem="fWV-FS-XRG" secondAttribute="bottom" id="9Ca-uv-6iz"/>
+                            <constraint firstItem="JTb-Cm-sJh" firstAttribute="centerX" secondItem="ZPu-iE-vSb" secondAttribute="centerX" id="GPE-mC-Azm"/>
+                            <constraint firstItem="4Z7-qQ-Sgt" firstAttribute="top" secondItem="aHO-a9-D9A" secondAttribute="top" id="J8k-uL-XAM"/>
+                            <constraint firstItem="aHO-a9-D9A" firstAttribute="trailing" secondItem="fWV-FS-XRG" secondAttribute="trailing" id="NCb-aA-PY9"/>
                             <constraint firstItem="Rhd-4P-Plm" firstAttribute="centerX" secondItem="ZPu-iE-vSb" secondAttribute="centerX" id="Qzd-zN-mHP"/>
+                            <constraint firstItem="aHO-a9-D9A" firstAttribute="bottom" secondItem="4Z7-qQ-Sgt" secondAttribute="bottom" id="TFg-We-UXF"/>
+                            <constraint firstItem="fWV-FS-XRG" firstAttribute="top" secondItem="aHO-a9-D9A" secondAttribute="top" id="bXu-Z1-1KF"/>
+                            <constraint firstItem="Rhd-4P-Plm" firstAttribute="top" secondItem="JTb-Cm-sJh" secondAttribute="bottom" constant="24" id="cVZ-JO-4sa"/>
+                            <constraint firstItem="fWV-FS-XRG" firstAttribute="leading" secondItem="aHO-a9-D9A" secondAttribute="leading" id="ehk-iL-oMt"/>
+                            <constraint firstItem="4Z7-qQ-Sgt" firstAttribute="leading" secondItem="aHO-a9-D9A" secondAttribute="leading" id="hPD-at-cDf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aHO-a9-D9A"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="Rhd-4P-Plm" id="16U-5n-0UI"/>
                         <segue destination="xsd-jy-k3T" kind="presentation" identifier="LoginSegue" id="Efk-e5-GSt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhj-0I-kkw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77.599999999999994" y="154.27286356821591"/>
+            <point key="canvasLocation" x="77.599999999999994" y="153.69458128078819"/>
         </scene>
         <!--Home-->
         <scene sceneID="vTD-mE-man">
@@ -56,7 +85,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="f3b-aE-D0i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.36089388480000001" green="0.82350473830000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.36089388480000001" green="0.82350473830000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="153" id="gUy-hI-f7O" customClass="TweetCell" customModule="Twitter" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="153"/>
@@ -142,4 +173,8 @@
             <point key="canvasLocation" x="1002" y="154"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="TwitterLogoBlue" width="400" height="400"/>
+        <image name="blueBack" width="183" height="275"/>
+    </resources>
 </document>

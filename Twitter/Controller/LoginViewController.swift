@@ -10,8 +10,14 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.layer.cornerRadius = 20
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        loginButton.clipsToBounds = true
         
         // Do any additional setup after loading the view.
     }

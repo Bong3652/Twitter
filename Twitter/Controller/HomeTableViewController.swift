@@ -74,6 +74,10 @@ class HomeTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -95,7 +99,10 @@ class HomeTableViewController: UITableViewController {
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
-        
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        //cell.layer.borderWidth = 10
+        //cell.layer.borderColor = #colorLiteral(red: 0.3608938848, green: 0.8235047383, blue: 1, alpha: 1)
 
         return cell
     }
@@ -106,7 +113,6 @@ class HomeTableViewController: UITableViewController {
         }
     }
  
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
