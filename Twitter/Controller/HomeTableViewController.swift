@@ -21,12 +21,19 @@ class HomeTableViewController: UITableViewController {
             , action: #selector(loadTweets), for: .valueChanged)
         tableView.refreshControl = myRefreshControl
         loadTweets()
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 150
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
     
     @objc func loadTweets() {
@@ -74,10 +81,6 @@ class HomeTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
-//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -99,6 +102,10 @@ class HomeTableViewController: UITableViewController {
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
+        cell.setFavorited(tweet["favorited"] as! Bool)
+        cell.tweetId = tweet["id"] as! Int
+        cell.setRetweeted(tweet["retweeted"] as! Bool)
+        
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         //cell.layer.borderWidth = 10
